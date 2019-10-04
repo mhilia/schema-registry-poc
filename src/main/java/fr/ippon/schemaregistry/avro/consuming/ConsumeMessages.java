@@ -37,7 +37,6 @@ public class ConsumeMessages {
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "io.confluent.kafka.serializers.KafkaAvroDeserializer");
         props.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, SCHEMA_REGISTRY_URL);
 
-
         KafkaConsumer<String, Consumer> kafkaConsumer = new KafkaConsumer<String, Consumer>(props);
         kafkaConsumer.subscribe(Arrays.asList(TOPIC));
 

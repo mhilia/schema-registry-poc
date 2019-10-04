@@ -34,9 +34,7 @@ public class ProduceConsumers {
     private static final Logger log = LoggerFactory.getLogger(ProduceConsumers.class);
 
 
-
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-
 
 
         Properties props = new Properties();
@@ -44,7 +42,7 @@ public class ProduceConsumers {
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, KEY_STRING_SERIALIZER_CLASS);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, VALUE_AVRO_SERIALIZER);
         props.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, SCHEMA_REGISTRY_URL);
-        props.put("acks" , "all");
+        props.put("acks", "all");
 
 
         String consumerAvroSchema = "{\n" +
@@ -68,10 +66,10 @@ public class ProduceConsumers {
         long start = System.currentTimeMillis();
 
         KafkaProducer<String, Consumer> producer = new KafkaProducer<>(props);
-        Random r  = new Random();
-        for(int i=0; i< NUM_RECORD ; i++){
+        Random r = new Random();
+        for (int i = 0; i < NUM_RECORD; i++) {
 
-            String consumerId = "eu#" + r.nextInt(5) + ( System.currentTimeMillis() - Long.MAX_VALUE);
+            String consumerId = "eu#" + r.nextInt(5) + (System.currentTimeMillis() - Long.MAX_VALUE);
             System.out.println(consumerId);
 
             final Consumer consumer = Consumer.newBuilder()
@@ -91,8 +89,8 @@ public class ProduceConsumers {
             producer.flush();
         }
 
-       long end = System.currentTimeMillis();
-       log.info("End in : " + ((end - start)/1000) + " seconds") ;
+        long end = System.currentTimeMillis();
+        log.info("End in : " + ((end - start) / 1000) + " seconds");
 
     }
 }
