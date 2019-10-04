@@ -1,20 +1,20 @@
 package fr.ippon.schemaregistry.avro.production;
 
 
- import fr.ippon.schemaregistry.avro.Civility;
- import fr.ippon.schemaregistry.avro.Consumer;
- import fr.ippon.schemaregistry.avro.consuming.ConsumeMessages;
- import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
+import fr.ippon.schemaregistry.avro.Civility;
+import fr.ippon.schemaregistry.avro.Consumer;
+import fr.ippon.schemaregistry.avro.consuming.ConsumeMessages;
+import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
- import org.apache.kafka.clients.producer.KafkaProducer;
- import org.apache.kafka.clients.producer.ProducerConfig;
- import org.apache.kafka.clients.producer.ProducerRecord;
- import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
- import org.slf4j.Logger;
- import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
- import java.util.Properties;
+import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -31,7 +31,7 @@ public class ProduceConsumers {
     private static final Class<KafkaAvroSerializer> VALUE_AVRO_SERIALIZER = KafkaAvroSerializer.class;
     private static final int NUM_RECORD = 10000;
 
-    private static final Logger log = LoggerFactory.getLogger(ConsumeMessages.class);
+    private static final Logger log = LoggerFactory.getLogger(ProduceConsumers.class);
 
 
 
@@ -65,17 +65,10 @@ public class ProduceConsumers {
                 " ]\n" +
                 "}\n";
 
-
-
-
-
-
         long start = System.currentTimeMillis();
 
-        Random r  = new Random();
-
         KafkaProducer<String, Consumer> producer = new KafkaProducer<>(props);
-
+        Random r  = new Random();
         for(int i=0; i< NUM_RECORD ; i++){
 
             String consumerId = "eu#" + r.nextInt(5) + ( System.currentTimeMillis() - Long.MAX_VALUE);
@@ -94,19 +87,12 @@ public class ProduceConsumers {
 
             final ProducerRecord<String, Consumer> record = new ProducerRecord<>(TOPIC, consumer.getConsumerId().toString(), consumer);
             Future<RecordMetadata> future = producer.send(record);
-            log.info("Message : TOPIC : %s, OFFSET : %s, PARTITION : %s%n", future.get().topic(),future.get().offset(),future.get().partition());
+            log.info("Message : TOPIC : %s, OFFSET : %s, PARTITION : %s%n", future.get().topic(), future.get().offset(), future.get().partition());
             producer.flush();
-
-
-
-
         }
 
-
-
-        long end = System.currentTimeMillis();
-
-        log.info("End in : " + ((end - start)/1000) + " seconds") ;
+       long end = System.currentTimeMillis();
+       log.info("End in : " + ((end - start)/1000) + " seconds") ;
 
     }
 }
