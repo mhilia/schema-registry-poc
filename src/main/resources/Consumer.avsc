@@ -1,0 +1,18 @@
+{
+ "type": "record",
+ "name": "Consumer",
+ "namespace": "fr.ippon.schemaregistry.avro",
+ "fields": [
+   { "name": "consumer_id" , "type": "string"},
+   { "name": "last_name"   ,"type": "string"},
+   { "name": "first_name", "type": "string" },
+   { "name": "city", "type": "string"},
+   {
+"name": "civility",
+"type": {"type": "enum","name": "Civility","symbols": ["MISS", "MR", "MS"]}
+   },
+   {"name": "country","type": "string" },
+   {"name": "phoneNumber", "type": [ "string","null" ]},
+   {"name": "email", "type": [ "string","null" ]}
+ ]
+}
