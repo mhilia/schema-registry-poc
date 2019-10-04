@@ -21,7 +21,7 @@ public class ConsumeMessages {
     private static final String SCHEMA_REGISTRY_URL = "http://localhost:8081";
     private static final String BOOTSTRAP_SERVERS = "localhost:9092";
 
-    Logger log = LoggerFactory.getLogger(ConsumeMessages.class);
+    private static final Logger log = LoggerFactory.getLogger(ConsumeMessages.class);
 
     public static void main(String[] args) {
 
